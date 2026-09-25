@@ -33,7 +33,7 @@ function stepLabel(step: SortStep) {
   return labels[step.kind];
 }
 
-export default function SortingVisualizer({ algorithm }: { algorithm: SortAlgorithm }) {
+export default function SortingVisualizer({ algorithm, onAlgorithmChange }: { algorithm: SortAlgorithm; onAlgorithmChange: (algorithm: SortAlgorithm) => void }) {
   const [input, setInput] = useState(DEFAULT);
   const [stepIndex, setStepIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -93,8 +93,8 @@ export default function SortingVisualizer({ algorithm }: { algorithm: SortAlgori
               </div>
             </div>
             <div style={{display:"flex",gap:8,marginTop:18,flexWrap:"wrap"}}>
-              <button className={`btn ${algorithm === "bubble" ? "btn-primary" : "btn-secondary"}`} onClick={() => setInput([...input])} aria-pressed={algorithm === "bubble"}>Bubble Sort</button>
-              <button className={`btn ${algorithm === "merge" ? "btn-primary" : "btn-secondary"}`} onClick={() => setInput([...input])} aria-pressed={algorithm === "merge"}>Merge Sort</button>
+              <button className={`btn ${algorithm === "bubble" ? "btn-primary" : "btn-secondary"}`} onClick={() => onAlgorithmChange("bubble")} aria-pressed={algorithm === "bubble"}>Bubble Sort</button>
+              <button className={`btn ${algorithm === "merge" ? "btn-primary" : "btn-secondary"}`} onClick={() => onAlgorithmChange("merge")} aria-pressed={algorithm === "merge"}>Merge Sort</button>
               <span className="pill">{info.complexity}</span>
             </div>
           </div>
